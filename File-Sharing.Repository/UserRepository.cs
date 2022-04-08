@@ -11,10 +11,16 @@ namespace File_Sharing.Repository
 
     public class UserRepository :IUser
     {
-        DataContext db;
-        public UserRepository(DataContext _db)
+        DataContext _db;
+        public UserRepository(DataContext db)
         {
-            db = _db;
+            _db = db;
+        }
+
+        public bool IsMailExist(string email)
+        {
+            User user = _db.Users.FirstOrDefault(x => x.Email.Equals(email));
+            return user != null;
         }
 
         public void Create(User user)
@@ -23,20 +29,34 @@ namespace File_Sharing.Repository
 
             string path = "wwwroot/File_Storage/User_" + user.Email;
             DirectoryInfo userDirPath = Directory.CreateDirectory(path);
-            user.FolderPath = userDirPath.FullName;
+            user.FolderPath = path;
             
-            db.Users.Add(user);
-            db.SaveChanges();
+            _db.Users.Add(user);
+            _db.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            User user = GetUserById(id);
+            _db.Users.Remove(user);
         }
 
         public User GetUserByEmail(string email)
         {
-            return db.Users.FirstOrDefault(x => x.Email.Equals(email));
+            return _db.Users.FirstOrDefault(x => x.Email.Equals(email));
         }
 
         public User GetUserById(int id)
         {
-            return db.Users.FirstOrDefault(x => x.Id == id);
+            return _db.Users.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Update(User user)
+        {
+            User up = GetUserById(user.Id);
+            up.Name = user.Name;
+            up.Email = user.Email;
+            _db.SaveChanges();
         }
     }
 }

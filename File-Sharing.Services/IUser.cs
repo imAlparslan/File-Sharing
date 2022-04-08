@@ -11,6 +11,10 @@ namespace File_Sharing.Services
     {
         public User GetUserById(int id);
         public User GetUserByEmail(string email);
+        public bool IsMailExist(string email);
         public void Create(User user);
+        public void Update(User user);
+        public void Delete(int id);
+        
     }
 }

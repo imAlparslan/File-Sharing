@@ -17,7 +17,12 @@ namespace File_Sharing.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public IActionResult Create()
+        {
+            //register form.
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Create(User user)
