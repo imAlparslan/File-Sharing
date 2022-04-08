@@ -19,8 +19,4 @@
     <ProjectReference Include="..\File-Sharing.Repository\File-Sharing.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\File_Storage\" />
-  </ItemGroup>
-
 </Project>

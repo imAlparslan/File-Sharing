@@ -22,10 +22,11 @@ namespace File_Sharing.Controllers
         [HttpPost]
         public IActionResult Create(User user)
         {
-            db.Create(user);
-            
-            string path = "wwwroot/File_Storage/User_"+ user.Id;
-            DirectoryInfo drinf = Directory.CreateDirectory(path);
+            //check mail
+            db.Create(user); 
+
+
+            //Show message
             return Ok(user);
         }
 
