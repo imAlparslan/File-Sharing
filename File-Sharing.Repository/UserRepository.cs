@@ -20,6 +20,11 @@ namespace File_Sharing.Repository
         public void Create(User user)
         {
             user.Created = DateTime.Now;
+
+            string path = "wwwroot/File_Storage/User_" + user.Email;
+            DirectoryInfo userDirPath = Directory.CreateDirectory(path);
+            user.FolderPath = userDirPath.FullName;
+            
             db.Users.Add(user);
             db.SaveChanges();
         }

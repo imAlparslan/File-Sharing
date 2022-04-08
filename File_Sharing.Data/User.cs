@@ -12,6 +12,7 @@ namespace File_Sharing.Data
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string? FolderPath { get; set; }
         public DateTime Created { get; set; }
     
     
