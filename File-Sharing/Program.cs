@@ -13,6 +13,7 @@ builder.Services.AddScoped<File_Sharing.Services.IUser, UserRepository>();
 
 
 
+
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"), b => b.MigrationsAssembly("File-Sharing"));

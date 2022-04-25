@@ -26,19 +26,25 @@ namespace File_Sharing.Repository
         public void Create(User user)
         {
             user.Created = DateTime.Now;
-
-            string path = "wwwroot/File_Storage/User_" + user.Email;
-            DirectoryInfo userDirPath = Directory.CreateDirectory(path);
-            user.FolderPath = path;
+            user.RemainingQuota = 1024;
             
             _db.Users.Add(user);
             _db.SaveChanges();
+            string path = "wwwroot/File_Storage/User_" + user.Id;
+            DirectoryInfo userDirPath = Directory.CreateDirectory(path);
+            user.FolderPath = path;
+            _db.SaveChanges();
+
+
+
         }
 
         public void Delete(int id)
         {
             User user = GetUserById(id);
+            Directory.Delete(user.FolderPath, true);
             _db.Users.Remove(user);
+            _db.SaveChanges();
         }
 
         public User GetUserByEmail(string email)

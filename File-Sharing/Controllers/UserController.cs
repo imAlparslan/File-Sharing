@@ -13,16 +13,19 @@ namespace File_Sharing.Controllers
             db = _db;
         }
 
-         public IActionResult Index()
+
+        public IActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         public IActionResult Create()
         {
             //register form.
             return View();
         }
+
 
         [HttpPost]
         public IActionResult Create(User user)
@@ -33,6 +36,13 @@ namespace File_Sharing.Controllers
 
             //Show message
             return Ok(user);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            db.Delete(id);
+            return Ok("User Deleted.");
         }
 
     }
