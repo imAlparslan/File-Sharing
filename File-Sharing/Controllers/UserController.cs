@@ -38,5 +38,12 @@ namespace File_Sharing.Controllers
             return Ok(user);
         }
 
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            db.Delete(id);
+            return Ok("User Deleted.");
+        }
+
     }
 }

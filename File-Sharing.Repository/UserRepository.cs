@@ -42,7 +42,9 @@ namespace File_Sharing.Repository
         public void Delete(int id)
         {
             User user = GetUserById(id);
+            Directory.Delete(user.FolderPath, true);
             _db.Users.Remove(user);
+            _db.SaveChanges();
         }
 
         public User GetUserByEmail(string email)
