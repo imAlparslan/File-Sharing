@@ -13,6 +13,7 @@ namespace File_Sharing.Repository
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
     }
 }
