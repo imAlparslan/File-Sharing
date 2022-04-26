@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddScoped<File_Sharing.Services.IUser, UserRepository>();
+builder.Services.AddScoped<File_Sharing.Services.IDocument, DocumentRepository>();
 
 
 

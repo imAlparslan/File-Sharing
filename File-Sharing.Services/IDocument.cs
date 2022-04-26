@@ -9,8 +9,8 @@ namespace File_Sharing.Services
 {
     public interface IDocument
     {
-        void Upload(IDocument document);
-        void Download(IDocument document);
+        void Upload(Document document);
+        void Download(Document document);
         Document GetDocumentById(int Id);
 
 

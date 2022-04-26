@@ -16,7 +16,7 @@ namespace File_Sharing.Repository
             _db = db;
         }
 
-        public void Download(IDocument document)
+        public void Download(Document document)
         {
             throw new NotImplementedException();
         }
@@ -26,9 +26,13 @@ namespace File_Sharing.Repository
             return _db.Documents.FirstOrDefault(d => d.Id == Id);
         }
 
-        public void Upload(IDocument document)
+        public void Upload(Document document)
         {
-            throw new NotImplementedException();
+
+            document.UploadDate = DateTime.Now;
+            _db.Documents.Add(document);
+            _db.SaveChanges();
+            
         }
     }
 }
