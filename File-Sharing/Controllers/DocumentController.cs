@@ -51,8 +51,8 @@ namespace File_Sharing.Controllers
             return View();
         }
 
-
-        public IActionResult Download(int documentId = 1)
+        [HttpGet]
+        public IActionResult Download(int documentId)
         {
             //check permission.
             Document document = _db.GetDocumentById(1);
