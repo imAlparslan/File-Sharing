@@ -1,0 +1,32 @@
+﻿@model File_Sharing.Models.UserCreate
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+
+
+
+<form asp-controller="User" asp-action="Create" method="post">
+
+    <label asp-for="Name">User Name</label>
+    <input asp-for="Name" type="text"/>
+    <span asp-validation-for="Name" class="text-danger"></span>
+
+    <label asp-for="Email">Email</label>
+    <input asp-for="Email" type="Email"/>
+    <span asp-validation-for="Email" class="text-danger"></span>
+
+    <label asp-for="Password">Password</label>
+    <input asp-for="Password" type="Password"/>
+    <span asp-validation-for="Password" class="text-danger"></span>
+
+    <label asp-for="PasswordValidation">Enter the Password Again.</label>
+    <input asp-for="PasswordValidation" type="Password"/>
+    <span asp-validation-for="PasswordValidation" class="text-danger"></span>
+
+
+    <button>Register</button>
+</form>

@@ -1,4 +1,5 @@
 ﻿using File_Sharing.Data;
+using File_Sharing.Models;
 using File_Sharing.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace File_Sharing.Controllers
         }
 
         [HttpGet]
+        [Route("Register")]
         public IActionResult Create()
         {
             //register form.
@@ -28,14 +30,26 @@ namespace File_Sharing.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(User user)
+        [Route("Register")]
+        public IActionResult Create(UserCreate userRequest)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(userRequest);
+            }
             //check mail
+            User user = new User
+            {
+                Name = userRequest.Name,
+                Email = userRequest.Email,
+                Password = userRequest.Password,
+
+            };
             db.Create(user); 
 
 
             //Show message
-            return Ok(user);
+            return RedirectToAction("Index","Home");
         }
 
         [HttpDelete]
