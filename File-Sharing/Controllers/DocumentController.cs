@@ -45,11 +45,17 @@ namespace File_Sharing.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        public IActionResult List()
+        {
+            return View();
+        }
 
+        [HttpGet]
         public IActionResult Download(int documentId)
         {
             //check permission.
-            Document document = _db.GetDocumentById(documentId);
+            Document document = _db.GetDocumentById(1);
             string filePath = document.FilePath;
             string fileName = document.FileName;
             
