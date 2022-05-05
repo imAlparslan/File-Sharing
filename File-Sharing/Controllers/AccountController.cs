@@ -2,7 +2,11 @@
 using File_Sharing.Models;
 using File_Sharing.Repository;
 using File_Sharing.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace File_Sharing.Controllers
 {
@@ -20,6 +24,47 @@ namespace File_Sharing.Controllers
         {
             return View();
         }
+        [HttpGet]
+        [Route("Login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login(Login request)
+        {
+            var user = _db.GetUserByEmail(request.Email);
+            if(user == null)
+            {
+                ModelState.AddModelError("Email", "Email Does Not Match.");
+                return View(request);
+
+            }else if (!user.Password.Equals(request.Password)){
+                ModelState.AddModelError("Password", "Invalid Password");
+                return View(request);
+            }
+
+            
+            var claims = new List<Claim>
+                {
+                    new Claim("type", "User"),
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Role, "User"),
+                    new Claim("ID", user.Id.ToString()),
+                    
+                };
+            var userIdentity = new ClaimsIdentity(claims, "CookieAuth");
+
+            ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+            await HttpContext.SignInAsync(principal);
+
+            return RedirectToAction("index","Home");
+        }
+
+
 
         [HttpGet]
         [Route("Register")]
@@ -28,7 +73,6 @@ namespace File_Sharing.Controllers
             //register form.
             return View();
         }
-
 
         [HttpPost]
         [Route("Register")]
@@ -58,6 +102,14 @@ namespace File_Sharing.Controllers
 
             //Show message
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Route("Test")]
+        public IActionResult Test()
+        {
+     
+            return View();
         }
 
     }

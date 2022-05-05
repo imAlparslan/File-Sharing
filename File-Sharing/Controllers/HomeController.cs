@@ -24,6 +24,10 @@ namespace File_Sharing.Controllers
             return View();
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
 
 
