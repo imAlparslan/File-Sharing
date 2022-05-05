@@ -2,7 +2,9 @@
 using File_Sharing.Models;
 using File_Sharing.Repository;
 using File_Sharing.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace File_Sharing.Controllers
 {
@@ -23,6 +25,7 @@ namespace File_Sharing.Controllers
         [HttpGet]
         public IActionResult Upload()
         {
+            
             return View();
         }
 
