@@ -25,27 +25,39 @@ namespace File_Sharing.Controllers
         [HttpGet]
         public IActionResult Upload()
         {
-            
-            return View();
+            if (User != null && User.Identity.IsAuthenticated)
+            { 
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("login", "Account");
+            }
+
         }
 
         [HttpPost]
         public IActionResult Upload(UploadFile doc)
         {
+            if (User != null && User.Identity.IsAuthenticated)
+            {
             if(doc !=null)
             {
-            var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/File_Storage/User_1/" + doc.File.FileName);
+            User fileOwner = _db.GetUserById(Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("ID")).Value));
+            var location = Path.Combine(Directory.GetCurrentDirectory(), fileOwner.FolderPath + doc.File.FileName);
             var stream = new FileStream(location, FileMode.Create);
             doc.File.CopyTo(stream);
-            
             Document document = new Document();
-            document.OwnerId = 1;
+            document.OwnerId = fileOwner.Id;
             document.FileName = doc.File.FileName;
             document.FilePath = location;
             _db.Upload(document);
             }
 
             return Ok();
+
+            }
+            return RedirectToAction("login","Account");
         }
 
         [HttpGet]

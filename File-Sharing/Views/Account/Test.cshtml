@@ -11,7 +11,7 @@
 <h1>  @User.Identity.IsAuthenticated</h1>
 <h1>  @User.Identity.Name</h1>
 <h1>  @User.IsInRole("User")  </h1>
-<h1>  @User.Claims.FirstOrDefault(x => x.Type.Equals("ID"))  </h1>
+<h1>  @User.Claims.FirstOrDefault(x => x.Type.Equals("ID")).Value  </h1>
  @foreach(var id in User.Claims){ <h1> @id.Type // @id.Value  </h1>}
 
 

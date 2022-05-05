@@ -30,7 +30,7 @@ namespace File_Sharing.Repository
             
             _db.Users.Add(user);
             _db.SaveChanges();
-            string path = "wwwroot/File_Storage/User_" + user.Id;
+            string path = "wwwroot/File_Storage/User_" + user.Id + "/";
             DirectoryInfo userDirPath = Directory.CreateDirectory(path);
             user.FolderPath = path;
             _db.SaveChanges();

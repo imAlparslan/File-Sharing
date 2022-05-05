@@ -12,6 +12,7 @@ namespace File_Sharing.Services
         void Upload(Document document);
         void Download(Document document);
         Document GetDocumentById(int Id);
+        public User GetUserById(int id);
 
 
     }

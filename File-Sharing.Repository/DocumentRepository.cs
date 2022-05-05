@@ -26,6 +26,11 @@ namespace File_Sharing.Repository
             return _db.Documents.FirstOrDefault(d => d.Id == Id);
         }
 
+        public User GetUserById(int id)
+        {
+            return _db.Users.FirstOrDefault(u => u.Id == id);
+        }
+
         public void Upload(Document document)
         {
 
