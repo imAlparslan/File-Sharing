@@ -82,6 +82,40 @@
     background-color: #ddd;
 }
 
+.text-danger{
+    color:red;
+}
+
+.form{
+    height: auto;
+    width:200px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.form-row {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 15px;
+}
+.form-row label, input{
+    display: block;
+}
+
+.form-row input{
+    height:25px;
+    width: 200px;
+}
+
+.form-row button{
+   margin-left:60px;
+   background-color: rgb(22, 107, 193);
+   color:white;
+   font-size: 1em;
+   padding: 0.25em 0.75em;
+}
+
 
 
 

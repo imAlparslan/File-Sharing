@@ -15,5 +15,17 @@ namespace File_Sharing.Repository
         public DbSet<User> Users { get; set; }
         public DbSet<Document> Documents { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+
+        }
+
+
+
     }
+
+   
+
 }

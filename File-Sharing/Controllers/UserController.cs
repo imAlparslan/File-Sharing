@@ -33,9 +33,15 @@ namespace File_Sharing.Controllers
         [Route("Register")]
         public IActionResult Register(UserCreate userRequest)
         {
-            //check mail
+
+            if (db.IsMailExist(userRequest.Email))
+            {
+                ModelState.AddModelError("Email", "This Mail Already Using.");
+            }
+
             if (!ModelState.IsValid)
             {
+                
                 return View(userRequest);
             }
 

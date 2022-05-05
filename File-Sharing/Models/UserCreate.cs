@@ -4,6 +4,13 @@ namespace File_Sharing.Models
 {
     public class UserCreate
     {
+
+        public UserCreate()
+        {
+
+        }
+
+
         [Required]
         [MinLength(3, ErrorMessage ="Min length is 3")]
         [MaxLength(16, ErrorMessage = "Max length is 16")]

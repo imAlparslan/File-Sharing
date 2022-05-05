@@ -64,5 +64,10 @@ namespace File_Sharing.Repository
             up.Email = user.Email;
             _db.SaveChanges();
         }
+
+        public bool IsMailUsing(string email)
+        {
+            return _db.Users.Any(x => x.Email.Equals(email));
+        }
     }
 }
