@@ -1,18 +1,19 @@
 ﻿using File_Sharing.Data;
 using File_Sharing.Models;
+using File_Sharing.Repository;
 using File_Sharing.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace File_Sharing.Controllers
 {
-    public class UserController : Controller
+    public class AccountController : Controller
     {
-        IUser db;
-
-        public UserController(IUser _db)
+        IUser _db;
+        public AccountController(IUser db)
         {
-            db = _db;
+            _db = db;
         }
+
 
 
         public IActionResult Index()
@@ -20,7 +21,6 @@ namespace File_Sharing.Controllers
             return View();
         }
 
-        /*
         [HttpGet]
         [Route("Register")]
         public IActionResult Register()
@@ -35,37 +35,30 @@ namespace File_Sharing.Controllers
         public IActionResult Register(UserCreate userRequest)
         {
 
-            if (db.IsMailExist(userRequest.Email))
+            if (_db.IsMailExist(userRequest.Email))
             {
                 ModelState.AddModelError("Email", "This Mail Already Using.");
             }
 
             if (!ModelState.IsValid)
             {
-                
+
                 return View(userRequest);
             }
 
             User user = new User()
-            { 
-                Name = userRequest.Name, 
+            {
+                Name = userRequest.Name,
                 Email = userRequest.Email,
                 Password = userRequest.Password,
             };
 
-            db.Create(user); 
+            _db.Create(user);
 
 
             //Show message
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
-  */
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            db.Delete(id);
-            return Ok("User Deleted.");
-        }
-      
+
     }
 }
