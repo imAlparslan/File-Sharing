@@ -1,3 +1,13 @@
 ﻿@{
-    Layout = "_Navbar";
+
+    if (User.Identity.IsAuthenticated)
+    {
+        Layout = "_Navbar";
+    }
+    else
+    {
+           Layout = "_Default";
+    }
+
+ 
 }

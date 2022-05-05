@@ -105,6 +105,14 @@ namespace File_Sharing.Controllers
         }
 
         [HttpGet]
+        [Route("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
         [Route("Test")]
         public IActionResult Test()
         {
