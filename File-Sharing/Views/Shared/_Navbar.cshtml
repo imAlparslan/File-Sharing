@@ -31,7 +31,7 @@
                     <button class="dropbtn">User_Name</button>
                     <div class="dropdown-content">
                       <a href="#">Settings</a>
-                      <a href="#">Logout</a>
+                      <a asp-controller="Account" asp-action="logout">Logout</a>
                     </div>
                   </div>
 
@@ -45,7 +45,7 @@
 
 
             @RenderBody()
-                     </div>
+          </div>
 
         <footer class="border-top footer text-muted">
         <div class="container">

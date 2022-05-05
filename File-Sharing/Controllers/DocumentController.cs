@@ -54,7 +54,7 @@ namespace File_Sharing.Controllers
             _db.Upload(document);
             }
 
-            return Ok();
+            return RedirectToAction("Index","Home");
 
             }
             return RedirectToAction("login","Account");
