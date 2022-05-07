@@ -36,6 +36,8 @@ namespace File_Sharing.Controllers
 
         }
 
+
+
         [HttpPost]
         public IActionResult Upload(UploadFile doc)
         {
@@ -43,6 +45,7 @@ namespace File_Sharing.Controllers
             {
             if(doc !=null)
             {
+            
             User fileOwner = _db.GetUserById(Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("ID")).Value));
             var location = Path.Combine(Directory.GetCurrentDirectory(), fileOwner.FolderPath + doc.File.FileName);
             var stream = new FileStream(location, FileMode.Create);
@@ -51,7 +54,12 @@ namespace File_Sharing.Controllers
             document.OwnerId = fileOwner.Id;
             document.FileName = doc.File.FileName;
             document.FilePath = location;
+            document.FileSize = Math.Round(stream.Length/1024.00/1024.00,2);
+            
+
+             
             _db.Upload(document);
+            
             }
 
             return RedirectToAction("Index","Home");

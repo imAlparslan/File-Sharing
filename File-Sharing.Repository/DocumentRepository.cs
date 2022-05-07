@@ -36,6 +36,9 @@ namespace File_Sharing.Repository
 
             document.UploadDate = DateTime.Now;
             _db.Documents.Add(document);
+             User fileOwner = GetUserById(document.OwnerId);
+            fileOwner.RemainingQuota -= document.FileSize;
+            _db.Update(fileOwner);
             _db.SaveChanges();
             
         }
