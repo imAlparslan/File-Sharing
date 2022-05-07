@@ -20,52 +20,13 @@ namespace File_Sharing.Controllers
             return View();
         }
 
-        /*
-        [HttpGet]
-        [Route("Register")]
-        public IActionResult Register()
-        {
-            //register form.
-            return View();
-        }
-
-
-        [HttpPost]
-        [Route("Register")]
-        public IActionResult Register(UserCreate userRequest)
-        {
-
-            if (db.IsMailExist(userRequest.Email))
-            {
-                ModelState.AddModelError("Email", "This Mail Already Using.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                
-                return View(userRequest);
-            }
-
-            User user = new User()
-            { 
-                Name = userRequest.Name, 
-                Email = userRequest.Email,
-                Password = userRequest.Password,
-            };
-
-            db.Create(user); 
-
-
-            //Show message
-            return RedirectToAction("Index","Home");
-        }
-  */
         [HttpDelete]
         public IActionResult Delete(int id)
         {
             db.Delete(id);
             return Ok("User Deleted.");
         }
+
       
     }
 }
