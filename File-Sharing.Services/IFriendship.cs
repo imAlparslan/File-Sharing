@@ -8,9 +8,9 @@ namespace File_Sharing.Services
 {
     public interface IFriendship
     {
-        public void CreateRequest(int senderId, int reciverId);
+        public void CreateRequest(int senderId, string reciverEmail);
         public void AcceptRequest(int FriendshipdId);
-        public void AcceptRequest(int FriendshipdId);
+        public void RejectRequest(int FriendshipdId);
         
 
     }

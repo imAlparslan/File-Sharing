@@ -25,11 +25,11 @@ namespace File_Sharing.Repository
             _db.SaveChanges();
         }
 
-        public void CreateRequest(int senderId, int reciverId)
+        public void CreateRequest(int senderId, string reciverEmail)
         {
-            Friendship p = new Friendship {
+            Friendship p = new Friendship() {
                 SenderId = senderId,
-                ReciverId = reciverId,
+                ReciverId = _db.Users.FirstOrDefault(x => x.Email.Equals(reciverEmail)).Id,
                 Status = Status.Request
             };
            _db.Friendships.Add(p);
@@ -42,6 +42,9 @@ namespace File_Sharing.Repository
             return _db.Friendships.FirstOrDefault(x => x.Id == friendshipId);
         }
 
-
+        public void RejectRequest(int FriendshipdId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
