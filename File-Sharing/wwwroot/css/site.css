@@ -16,3 +16,34 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.conteiner {
+    overflow: hidden;
+}
+
+.side-bar {
+
+    width: 180px;
+    float: left;
+    position: absolute;
+}
+
+.side-bar-button{
+    text-decoration:none;
+    display:block;
+    padding: 14px 15px;
+    background-color:white;
+
+}
+
+.side-bar-content {
+    background: red;
+    color: #fff;
+    height: 500px;
+    width: 630px;
+    border-radius: 4px;
+    margin: 20px;
+    margin-left: 25%;
+    border: 1px solid #777;
+
+}

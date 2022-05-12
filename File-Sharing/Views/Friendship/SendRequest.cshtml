@@ -1,0 +1,24 @@
+﻿@model File_Sharing.Models.FriendshipRequest
+
+@{
+    ViewData["Title"] = "Send Friendship Request";
+}
+
+@Html.Partial("_Sidebar")
+
+<div class="side-bar-content">
+
+
+
+<form asp-controller="Friendship" asp-action="SendRequest" method="post">
+
+
+<label asp-for="ReciverEmail" >Enter user email</label>
+<input asp-for="ReciverEmail" type="text"/>
+
+<button>Send Request</button>
+
+
+</form>
+</div>
+

@@ -2,8 +2,8 @@
 {
     public class FriendshipRequest
     {
-        public int SenderId { get; set; }
-        public int ReciverId { get; set; }
+        
+        public string ReciverEmail { get; set; }
 
     }
 }

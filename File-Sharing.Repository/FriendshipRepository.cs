@@ -25,11 +25,11 @@ namespace File_Sharing.Repository
             _db.SaveChanges();
         }
 
-        public void CreateRequest(int senderId, int reciverId)
+        public void CreateRequest(int senderId, string reciverEmail)
         {
-            Friendship p = new Friendship {
+            Friendship p = new Friendship() {
                 SenderId = senderId,
-                ReciverId = reciverId,
+                ReciverId = _db.Users.FirstOrDefault(x => x.Email.Equals(reciverEmail)).Id,
                 Status = Status.Request
             };
            _db.Friendships.Add(p);
@@ -37,11 +37,44 @@ namespace File_Sharing.Repository
             
         }
 
+        public List<Friendship> GetFriends(int userId)
+        {
+            List<Friendship> friends = _db.Friendships.Where(x => x.Status == Status.Friend && 
+            (x.ReciverId == userId || x.SenderId == userId)).ToList();
+            return friends;
+        }
+
         public Friendship GetFriendshipById(int friendshipId)
         {
             return _db.Friendships.FirstOrDefault(x => x.Id == friendshipId);
         }
 
+        public List<Friendship> GetReceivedRequests(int userId)
+        {
+            List<Friendship> receivedRequests = _db.Friendships.Where(x => x.ReciverId == userId && x.Status == Status.Request).ToList();
+            return receivedRequests;
+        }
 
+        public string GetUserNameById(int senderId)
+        {
+            return _db.Users.FirstOrDefault(x => x.Id == senderId).Name;
+        }
+
+        public string GetUserMailById(int userId)
+        {
+            return _db.Users.FirstOrDefault(x => x.Id != userId).Email;
+        }
+
+        public void RejectRequest(int FriendshipdId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int friendshipId)
+        {
+            Friendship friendship = _db.Friendships.FirstOrDefault(x => x.Id == friendshipId);
+            _db.Friendships.Remove(friendship);
+            _db.SaveChanges();
+        }
     }
 }
