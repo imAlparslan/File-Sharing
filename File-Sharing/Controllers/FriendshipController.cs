@@ -81,9 +81,15 @@ namespace File_Sharing.Controllers
             return RedirectToAction("GetReceivedRequests", "Friendship");
 
         }
+        [Route("reject/{FriendshipId:int}")]
+        public IActionResult RejectRequest(int FriendshipId)
+        {
+            _db.RejectRequest(FriendshipId);
+            return RedirectToAction("GetReceivedRequests", "Friendship");
+
+        }
 
 
-        
         [Route("delete/{friendshipId:int}")]
         public IActionResult DeleteFriend(int friendshipId)
         {

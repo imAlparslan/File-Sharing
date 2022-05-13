@@ -62,12 +62,15 @@ namespace File_Sharing.Repository
 
         public string GetUserMailById(int userId)
         {
-            return _db.Users.FirstOrDefault(x => x.Id != userId).Email;
+            return _db.Users.FirstOrDefault(x => x.Id == userId).Email;
         }
 
         public void RejectRequest(int FriendshipdId)
         {
-            throw new NotImplementedException();
+            Friendship friendship = GetFriendshipById(FriendshipdId);
+            _db.Friendships.Remove(friendship);
+            _db.SaveChanges();
+
         }
 
         public void Delete(int friendshipId)

@@ -53,7 +53,8 @@ namespace File_Sharing.Controllers
                     new Claim(ClaimTypes.Name, user.Name),
                     new Claim(ClaimTypes.Role, "User"),
                     new Claim("ID", user.Id.ToString()),
-                    
+                    new Claim("UserName", user.Name),
+
                 };
             var userIdentity = new ClaimsIdentity(claims, "CookieAuth");
 
