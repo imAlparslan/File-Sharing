@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string userName = User.Identity.Name;
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -28,7 +32,7 @@
          <ul class="navbar-table-right">
             <li>
                 <div class="dropdown">
-                    <button class="dropbtn">User_Name</button>
+                    <button class="dropbtn">@userName</button>
                     <div class="dropdown-content">
                       <a href="#">Settings</a>
                       <a asp-controller="Account" asp-action="logout">Logout</a>

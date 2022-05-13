@@ -26,7 +26,9 @@
     <tr> 
         <td>@request.SenderName </td>  
         <td>@request.SenderEmail</td>
-        <td> <a asp-controller="Friendship" asp-action="AcceptRequest" asp-route-FriendshipId="@request.FriendshipId" >Approve</a> </td>
+        <td> <a asp-controller="Friendship" asp-action="AcceptRequest" asp-route-FriendshipId="@request.FriendshipId" >Approve</a> 
+             <td> <a asp-controller="Friendship" asp-action="RejectRequest" asp-route-FriendshipId="@request.FriendshipId" >Reject</a>
+        </td>
     </tr>
     
 
