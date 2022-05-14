@@ -26,6 +26,13 @@ namespace File_Sharing.Repository
             return _db.Documents.FirstOrDefault(d => d.Id == Id);
         }
 
+        public List<Document> GetMyDocuments(int userId)
+        {
+            List<Document> documents = _db.Documents.Where(x => x.OwnerId == userId).ToList();
+
+            return documents;
+        }
+
         public User GetUserById(int id)
         {
             return _db.Users.FirstOrDefault(u => u.Id == id);
