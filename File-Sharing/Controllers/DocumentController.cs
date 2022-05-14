@@ -19,7 +19,26 @@ namespace File_Sharing.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            int senderId = GetAuthenticatedUserId();
+
+            List<Document> myDocuments = _db.GetMyDocuments(senderId);
+            List<MyFile> myFiles = new List<MyFile>();
+
+          
+            foreach (Document document in myDocuments)
+            {
+                myFiles.Add(new MyFile()
+                {
+                    FileName = document.FileName,
+                    FileSize = document.FileSize,
+                    UploadDate = document.UploadDate,
+                    FilePath = document.FilePath,
+                    Id = document.Id,
+                });
+            }
+                
+
+            return View(myFiles);
         }
 
         [HttpGet]
@@ -86,6 +105,13 @@ namespace File_Sharing.Controllers
 
             var response = File(System.IO.File.ReadAllBytes(filePath), "application/octet-stream", fileName);
             return response;
+        }
+
+
+        private int GetAuthenticatedUserId()
+        {
+            int userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("ID")).Value);
+            return userId;
         }
     }
 }
