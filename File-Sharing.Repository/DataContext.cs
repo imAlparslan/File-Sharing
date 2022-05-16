@@ -15,7 +15,7 @@ namespace File_Sharing.Repository
         public DbSet<User> Users { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
-
+        public DbSet<DocumentAccess> DocumentAccesses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

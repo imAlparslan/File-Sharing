@@ -2,7 +2,7 @@
 {
     public class MyFile
     {
-        public int Id { get; set; }
+        public int DocumentId { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
         public double FileSize { get; set; }
