@@ -13,6 +13,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<File_Sharing.Services.IUser, UserRepository>();
 builder.Services.AddScoped<File_Sharing.Services.IDocument, DocumentRepository>();
 builder.Services.AddScoped<File_Sharing.Services.IFriendship, FriendshipRepository>();
+builder.Services.AddScoped<File_Sharing.Services.IDocumentAccess, DocumentAccessRepository>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie
     (x =>

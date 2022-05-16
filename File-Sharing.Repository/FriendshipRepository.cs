@@ -73,6 +73,11 @@ namespace File_Sharing.Repository
 
         }
 
+        public int GetFriendId(int userId, Friendship friendship)
+        {
+            return friendship.SenderId == userId ? friendship.ReciverId : friendship.SenderId;
+        }
+
         public void Delete(int friendshipId)
         {
             Friendship friendship = _db.Friendships.FirstOrDefault(x => x.Id == friendshipId);

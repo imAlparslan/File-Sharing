@@ -10,9 +10,9 @@
 @if(@Model.Count() > 0)
 {
     
-
 <table>
     <tr>
+        <th>ID</th>
         <th>File Name</th>
         <th>File Size</th>
         <th>Uploaded Date</th>
@@ -23,17 +23,15 @@
     @foreach (MyFile myFile in @Model)
     {
         <tr>
+
+            <th>@myFile.DocumentId</th>
             <th>@myFile.FileName</th>
             <th>@myFile.FileSize</th>
             <th>@myFile.UploadDate</th>
-            <th><a asp-controller="Document" asp-action="Manage" asp-route="@myFile.Id" >Manege</a></th>
-
+            <th> <a asp-controller="DocumentAccess" asp-action="Index" asp-route-fileId=@myFile.DocumentId>manage</a> </th>
         </tr>
-
-
     }
 
 
 </table>
-
 }

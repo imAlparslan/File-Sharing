@@ -33,7 +33,7 @@ namespace File_Sharing.Controllers
                     FileSize = document.FileSize,
                     UploadDate = document.UploadDate,
                     FilePath = document.FilePath,
-                    Id = document.Id,
+                    DocumentId = document.Id,
                 });
             }
                 
