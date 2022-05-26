@@ -97,7 +97,7 @@ namespace File_Sharing.Controllers
         public IActionResult Download(int documentId)
         {
             //check permission.
-            Document document = _db.GetDocumentById(1);
+            Document document = _db.GetDocumentById(documentId);
             string filePath = document.FilePath;
             string fileName = document.FileName;
             

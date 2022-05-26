@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Inbox>
+@{
+    ViewData["Title"] = "Inbox";
+
+}
+
+
+<p>Inbox</p>
+
+
+@if (Model.Count() > 0)
+{
+    foreach (Inbox inbox in Model)
+    {
+    
+    <div class="my-file-container">
+            <p>File Sender: @inbox.FileOwnerName</p>
+            <p>File Name: @inbox.FileName</p>
+            <p>File Size: @inbox.FileSize</p>
+            <p>Sharing Date @inbox.SharingDate</p>
+            <a asp-controller="Document" asp-action="Download" asp-route-documentId=@inbox.DocumentId>Download</a>
+    </div>  
+    }
+
+
+
+}else{
+    <p> You did not get a file.</p>
+}
+
+

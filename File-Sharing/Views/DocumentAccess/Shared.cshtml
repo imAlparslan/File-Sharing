@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MyFile>;
+
+@{
+
+    ViewData["Title"] = "My Sharings";
+}
+
+
+<h3>You are sharing this files.</h3>
+
+
+@if(@Model.Count() > 0)
+{
+    @foreach (MyFile myFile in Model)
+    {
+        <div class="my-file-container">
+            <p> Name: @myFile.FileName </p>
+            <p> Size: @myFile.FileSize </p>
+        </div>
+    }
+
+
+}else {
+
+    <p>Your not sharing a file</p>
+
+}
