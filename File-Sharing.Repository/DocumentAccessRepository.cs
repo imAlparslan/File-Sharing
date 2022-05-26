@@ -75,5 +75,22 @@ namespace File_Sharing.Repository
 
             throw new NotImplementedException();
         }
+
+        public List<DocumentAccess> GetMySharings(int userId)
+        {
+            return _db.DocumentAccesses.Where(x => x.OwnerId == userId).ToList();
+        }
+
+        public Document FindDocumentByAccessId(int accessId)
+        {
+            DocumentAccess access = _db.DocumentAccesses.FirstOrDefault(x => x.Id == accessId);
+            return _db.Documents.FirstOrDefault(x => x.Id == access.DocumentId);
+                
+        }
+
+        public List<DocumentAccess> GetSharingWithMe(int userId)
+        {
+            return _db.DocumentAccesses.Where(x => x.AccessorId == userId).ToList();
+        }
     }
 }

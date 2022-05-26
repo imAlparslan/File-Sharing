@@ -74,7 +74,64 @@ namespace File_Sharing.Controllers
              ));
         }
 
+        [HttpGet]
+        [Route("shared")]
+        public IActionResult Shared()
+        {
+            
+            int userId = GetAuthenticatedUserId();
+            List<DocumentAccess> myAccessebleFiles = _db.GetMySharings(userId); 
+            List<MyFile> mySharingFiles = new List<MyFile>();
 
+            foreach (DocumentAccess documentAccess in myAccessebleFiles)
+            {
+                Document document = _db.FindDocumentByAccessId(documentAccess.Id);
+               
+                mySharingFiles.Add(new MyFile() {
+                DocumentId = document.Id,
+                FileName = document.FileName,
+                FilePath = document.FilePath,
+                FileSize = document.FileSize,
+                UploadDate = documentAccess.GivenTime,
+
+            }); 
+            }
+
+
+
+            return View(mySharingFiles);
+        }
+
+        [HttpGet]
+        [Route("inbox")]
+        public IActionResult SharingWithMe()
+        {
+            int userId = GetAuthenticatedUserId();
+            List<DocumentAccess> accesses = _db.GetSharingWithMe(userId);
+            List<Inbox> myAccessibleFiles = new List<Inbox>();
+
+            foreach (DocumentAccess documentAccess in accesses)
+            {
+                Document document = _db.FindDocumentByAccessId(documentAccess.Id);
+                myAccessibleFiles.Add(new Inbox()
+                {
+                    
+                    DocumentId = document.Id,
+                    FileName = document.FileName,
+                    FileOwnerName = _db.GetUserNameById(documentAccess.OwnerId),
+                    FilePath = document.FilePath,
+                    FileSize = document.FileSize,
+                    SharingDate = documentAccess.GivenTime
+
+
+                });
+
+            }
+
+
+
+            return View(myAccessibleFiles);
+        }
 
 
         /*

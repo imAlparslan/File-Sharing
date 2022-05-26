@@ -17,6 +17,10 @@ namespace File_Sharing.Services
         public string GetUserNameById(int userId);
         public string GetFriendName(Friendship friendship);
         public int GetFriendId(int userId, int friendshipId);
+        public Document FindDocumentByAccessId(int accessId);
+
+        public List<DocumentAccess> GetMySharings(int userId);
+        public List<DocumentAccess> GetSharingWithMe(int userId);
 
 
 
