@@ -1,10 +1,14 @@
 ﻿@using File_Sharing.Data
-@model IEnumerable<Accessor>
+@using X.PagedList
+@using X.PagedList.Mvc.Bootstrap4.Core
+@using X.PagedList.Mvc.Core
+@model IPagedList<Accessor>
 
 
 @{
     ViewData["Title"] = "Manage File";
-    List<Friend> friends = (List<Friend>) ViewData["friends"];
+   // List<Friend> friendss = (List<Friend>) ViewData["friends"];
+    PagedList<Friend> friends = (PagedList<Friend>) ViewData["friends"];
     int fileId = ViewBag.fileId;
     ShareWith sharewith = new ShareWith();
     sharewith.DocumentId = fileId;
@@ -33,9 +37,10 @@
         }
 
     </table>
-}else{
+}else{  
     <p> No one Can Access </p>
 }
+   @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { fileId = fileId, page = page, test = 2 }), Bootstrap4PagedListRenderOptions.OnlyShowFivePagesAtATime)
 
 <br />
 <br />
@@ -65,7 +70,8 @@
         }
 
     </table>
-
+       @Html.PagedListPager((IPagedList)friends, page => Url.Action("Index", new { fileId = fileId} ), Bootstrap4PagedListRenderOptions.OnlyShowFivePagesAtATime)
+       
     }else{
     <p> No one Can Access </p>
 }

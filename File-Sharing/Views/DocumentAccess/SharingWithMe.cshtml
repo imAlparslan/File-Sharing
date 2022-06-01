@@ -1,4 +1,9 @@
-﻿@model IEnumerable<Inbox>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Bootstrap4.Core
+@using X.PagedList.Mvc.Core
+
+@model IPagedList<Inbox>
+
 @{
     ViewData["Title"] = "Inbox";
 
@@ -13,14 +18,32 @@
     foreach (Inbox inbox in Model)
     {
     
-    <div class="my-file-container">
-            <p>File Sender: @inbox.FileOwnerName</p>
-            <p>File Name: @inbox.FileName</p>
-            <p>File Size: @inbox.FileSize</p>
-            <p>Sharing Date @inbox.SharingDate</p>
-            <a asp-controller="Document" asp-action="Download" asp-route-documentId=@inbox.DocumentId>Download</a>
+    <div class="my-file-container" id=inbox>
+        <table class="vertical-table">
+            <tr>
+                <th>File Sender: </th>
+                <td>@inbox.FileOwnerName</td>
+            </tr>
+            <tr>
+                <th>File Name: </th>
+                <td>@inbox.FileName</td>
+            </tr>
+            <tr>
+                <th>File Size: </th>
+                <td>@inbox.FileSize</td>
+            </tr>
+            <tr>
+                <th>Date: </th>
+                <td>@inbox.SharingDate</td>
+            </tr>
+        </table>
+        <div class="button-conteiner">
+            <a class="general-button" id="download-button" asp-controller="Document" asp-action="Download" asp-route-documentId=@inbox.DocumentId>Download</a>
+
+        </div>
     </div>  
     }
+       @Html.PagedListPager((IPagedList)Model, page => Url.Action("SharingWithMe", new { page }), Bootstrap4PagedListRenderOptions.OnlyShowFivePagesAtATime)
 
 
 

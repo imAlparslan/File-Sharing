@@ -1,4 +1,9 @@
-﻿@model IEnumerable<MyFile>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Bootstrap4.Core
+@using X.PagedList.Mvc.Core
+
+@model IPagedList<MyFile>
+
 @{
     ViewData["Title"] = "My Files";
 }
@@ -12,15 +17,33 @@
     {
 
     <div class="my-file-container">
-        <p class="file-name">@myFile.FileName</p>
-        <p class="">@myFile.FileSize</p>
-        <p class=""> @myFile.UploadDate</p>
-        <a asp-controller="DocumentAccess" asp-action="Index" asp-route-fileId=@myFile.DocumentId>manage</a>
+        <table class ="vertical-table">
+            <tr>
+                <th>File Name: </th>
+                <td>@myFile.FileName</td>
+            </tr>
+            <tr>
+                <th>File Size: </th>
+                <td>@myFile.FileSize Mb</td>
+            </tr>
+            <tr>
+                <th>Upload Date: </th>
+                <td>@myFile.UploadDate</td>
+            </tr>
+        </table>
 
+        <div class="button-conteiner">
+        <a class="general-button" id ="manage-button"  asp-controller="DocumentAccess" asp-action="Index" asp-route-fileId=@myFile.DocumentId>Manage</a>
+        <a class="general-button" id ="manage-button"  asp-controller="DocumentAccess" asp-action="Index" asp-route-fileId=@myFile.DocumentId>Download</a>
+        <a class="general-button" id ="manage-button"  asp-controller="DocumentAccess" asp-action="Index" asp-route-fileId=@myFile.DocumentId>Delete</a>
+
+    
     </div>
-
+    </div>
 
     }
 
-}
+ 
+   @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), Bootstrap4PagedListRenderOptions.OnlyShowFivePagesAtATime)
 
+}

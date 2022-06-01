@@ -2,6 +2,7 @@
 using File_Sharing.Models;
 using File_Sharing.Services;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 
 namespace File_Sharing.Controllers
 {
@@ -12,6 +13,7 @@ namespace File_Sharing.Controllers
         public DocumentAccessController(IDocumentAccess db)
         {
             _db = db;
+            
         }
         
         [Route("share/{fileId:int}/{friendshipId:int}")]
@@ -27,7 +29,7 @@ namespace File_Sharing.Controllers
 
 
         [HttpGet]
-        public IActionResult Index(int fileId)
+        public IActionResult Index(int fileId, int page = 1, int test = 1)
         {
             int userId = GetAuthenticatedUserId();
             List<DocumentAccess> accesses = _db.GetAccessorsList(userId, fileId); 
@@ -59,8 +61,10 @@ namespace File_Sharing.Controllers
 
             }
             ViewBag.fileId = fileId;
-            ViewData["friends"] = friends;
-            return View(accessors);
+            PagedList<Friend> fr = (PagedList<Friend>)friends.ToPagedList(test,1);
+            ViewData["friends"] = fr;
+            PagedList<Accessor> pagedList = (PagedList<Accessor>)accessors.ToPagedList(page, 10);
+            return View(pagedList);
         }
 
         [HttpGet]
@@ -76,7 +80,7 @@ namespace File_Sharing.Controllers
 
         [HttpGet]
         [Route("shared")]
-        public IActionResult Shared()
+        public IActionResult Shared(int page = 1)
         {
             
             int userId = GetAuthenticatedUserId();
@@ -97,14 +101,14 @@ namespace File_Sharing.Controllers
             }); 
             }
 
+            PagedList<MyFile> pagedList = (PagedList<MyFile>)mySharingFiles.ToPagedList(page , 4);
 
-
-            return View(mySharingFiles);
+            return View(pagedList);
         }
 
         [HttpGet]
         [Route("inbox")]
-        public IActionResult SharingWithMe()
+        public IActionResult SharingWithMe(int page = 1)
         {
             int userId = GetAuthenticatedUserId();
             List<DocumentAccess> accesses = _db.GetSharingWithMe(userId);
@@ -128,9 +132,10 @@ namespace File_Sharing.Controllers
 
             }
 
+            var pagedList = (PagedList<Inbox>)myAccessibleFiles.ToPagedList(page, 4);
 
 
-            return View(myAccessibleFiles);
+            return View(pagedList);
         }
 
 
