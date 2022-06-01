@@ -2,6 +2,7 @@
 using File_Sharing.Models;
 using File_Sharing.Services;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 
 namespace File_Sharing.Controllers
 {
@@ -33,7 +34,7 @@ namespace File_Sharing.Controllers
 
         [HttpGet]
         [Route("friends")]
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             int userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("ID")).Value);
             List<Friendship> friendships = _db.GetFriends(userId);
@@ -48,14 +49,14 @@ namespace File_Sharing.Controllers
                     FriendshipId = friend.Id
                 });
             }
+            PagedList<Friend> pagedList = (PagedList<Friend>)friends.ToPagedList();
 
-
-            return View(friends);
+            return View(pagedList);
         }
 
         [HttpGet]
         [Route("requests")]
-        public IActionResult GetReceivedRequests()
+        public IActionResult GetReceivedRequests(int page = 1)
         {
             int userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("ID")).Value);
             List<Friendship> list = _db.GetReceivedRequests(userId);
@@ -69,8 +70,9 @@ namespace File_Sharing.Controllers
                     SenderName = _db.GetUserNameById(friendship.SenderId),
                 });
             }
+            PagedList<Request> pagedList = (PagedList<Request>)requests.ToPagedList();
 
-            return View(requests);
+            return View(pagedList);
         }
 
         //[HttpPost]

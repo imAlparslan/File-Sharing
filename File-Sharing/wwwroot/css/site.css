@@ -48,19 +48,63 @@ body {
 
 }
 
-
-
 .my-file-container{
+
     box-sizing:content-box;
-    height: 250px;
+    height: 120px;
     width: 700px;
-    background-color:rgb(184, 141, 141);
+    border: 2px solid black;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
     padding:10px;
 }
 
-.file-name{
+  #inbox{
+      height:160px;
+  }
 
+.button-conteiner {
+    float: right;
+    width: fit-content;
+    height: fit-content;
+    display:inline-block;
+    text-align:center;
+    margin-block:10px;
 }
+.general-button {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    background-color: rgb(203, 190, 190,0.5);
+    box-sizing: content-box;
+    padding-block: 5px;
+    padding-inline: 35px;
+}
+#download-button {
+    color:white;
+    background-color:cornflowerblue;
+}
+#manage-button {
+    display:block;
+    margin-bottom:8px;
+    
+}
+#download-button:hover{
+    color:lightgray;
+}
+.vertical-table{
+    float:left;
+}
+
+.vertical-table{
+    font-size: 18px;
+    border-collapse:separate;
+    border-spacing:10px;
+    
+}
+
+.vertical-table tr{
+    margin-top: 120px;
+}
+

@@ -4,7 +4,7 @@ using File_Sharing.Repository;
 using File_Sharing.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using X.PagedList;
 
 namespace File_Sharing.Controllers
 {
@@ -17,13 +17,13 @@ namespace File_Sharing.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             int senderId = GetAuthenticatedUserId();
 
-            List<Document> myDocuments = _db.GetMyDocuments(senderId);
+            var myDocuments = _db.GetMyDocuments(senderId);
             List<MyFile> myFiles = new List<MyFile>();
-
+            
           
             foreach (Document document in myDocuments)
             {
@@ -36,9 +36,10 @@ namespace File_Sharing.Controllers
                     DocumentId = document.Id,
                 });
             }
-                
+         
+            var pagedList = (PagedList<MyFile>)myFiles.ToPagedList(page, 4);    
 
-            return View(myFiles);
+            return View(pagedList);
         }
 
         [HttpGet]

@@ -1,5 +1,8 @@
 ﻿@using File_Sharing.Data
-@model IEnumerable<Friend>
+@using X.PagedList
+@using X.PagedList.Mvc.Bootstrap4.Core
+@using X.PagedList.Mvc.Core
+@model IPagedList<Friend>
 @{
             ViewData["Title"] = "My Friends";
 }
@@ -35,3 +38,4 @@
 </table>
 }
 </div>
+   @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), Bootstrap4PagedListRenderOptions.OnlyShowFivePagesAtATime)
