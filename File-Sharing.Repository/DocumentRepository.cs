@@ -16,6 +16,14 @@ namespace File_Sharing.Repository
             _db = db;
         }
 
+        public void Delete(int DocumentId)
+        {
+            
+            Document document = _db.Documents.FirstOrDefault( x => x.Id == DocumentId);
+            _db.Documents.Remove(document);
+            _db.SaveChanges();
+        }
+
         public void Download(Document document)
         {
             throw new NotImplementedException();

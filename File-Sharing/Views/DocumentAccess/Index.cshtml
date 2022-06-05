@@ -40,7 +40,6 @@
 }else{  
     <p> No one Can Access </p>
 }
-   @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { fileId = fileId, page = page, test = 2 }), Bootstrap4PagedListRenderOptions.OnlyShowFivePagesAtATime)
 
 <br />
 <br />
@@ -70,7 +69,6 @@
         }
 
     </table>
-       @Html.PagedListPager((IPagedList)friends, page => Url.Action("Index", new { fileId = fileId} ), Bootstrap4PagedListRenderOptions.OnlyShowFivePagesAtATime)
        
     }else{
     <p> No one Can Access </p>
