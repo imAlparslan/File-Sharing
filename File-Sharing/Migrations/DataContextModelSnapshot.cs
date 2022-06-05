@@ -17,7 +17,7 @@ namespace File_Sharing.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -66,6 +66,9 @@ namespace File_Sharing.Migrations
                     b.Property<int>("DocumentId")
                         .HasColumnType("int");
 
+                    b.Property<int>("FriendshipId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("GivenTime")
                         .HasColumnType("datetime2");
 
@@ -73,6 +76,10 @@ namespace File_Sharing.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DocumentId");
+
+                    b.HasIndex("FriendshipId");
 
                     b.ToTable("DocumentAccesses");
                 });
@@ -134,6 +141,25 @@ namespace File_Sharing.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("File_Sharing.Data.DocumentAccess", b =>
+                {
+                    b.HasOne("File_Sharing.Data.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("File_Sharing.Data.Friendship", "Friendship")
+                        .WithMany()
+                        .HasForeignKey("FriendshipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Friendship");
                 });
 #pragma warning restore 612, 618
         }

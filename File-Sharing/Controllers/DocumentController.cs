@@ -43,6 +43,14 @@ namespace File_Sharing.Controllers
         }
 
         [HttpGet]
+        public IActionResult Delete(int fileId)
+        {
+            //delete from folder.
+            _db.Delete(fileId);
+            return RedirectToAction("Index", "Document");
+        }
+
+        [HttpGet]
         public IActionResult Upload()
         {
             if (User != null && User.Identity.IsAuthenticated)

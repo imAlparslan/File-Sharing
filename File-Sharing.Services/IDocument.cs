@@ -11,6 +11,7 @@ namespace File_Sharing.Services
     {
         void Upload(Document document);
         void Download(Document document);
+        void Delete(int DocumentId);
         List<Document> GetMyDocuments(int userId);
         Document GetDocumentById(int Id);
         public User GetUserById(int id);

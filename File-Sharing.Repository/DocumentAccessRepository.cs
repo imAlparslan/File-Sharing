@@ -23,7 +23,8 @@ namespace File_Sharing.Repository
             {
                 OwnerId = userId,
                 DocumentId = documentId,
-                AccessorId = GetFriendId(userId,friendshipId),
+                AccessorId = GetFriendId(userId, friendshipId),
+                Friendship = _db.Friendships.FirstOrDefault(x => x.Id == friendshipId),
                 GivenTime = DateTime.Now,
                 
            };

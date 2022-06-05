@@ -21,6 +21,7 @@ namespace File_Sharing.Repository
         {
             builder.Entity<User>().HasIndex(u => u.Email).IsUnique();
 
+
         }
 
 
