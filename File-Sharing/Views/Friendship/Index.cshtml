@@ -17,25 +17,32 @@
 {
     
 
-<table>
-    <tr>
-        <th> Name </th>
-        <th> Email </th>
-        <th> </th>
-    </tr>
+
     @foreach (Friend friend in Model)
-    {
-    <tr> 
-        <td>@friend.Name </td>  
-        <td>@friend.Email</td>
-        <td> <a asp-controller="Friendship" asp-action="DeleteFriend" asp-route-friendshipId="@friend.FriendshipId" >Remove</a> </td>
-    </tr>
-    
+    {   
+        <div class="my-file-container">    
+         <table class ="vertical-table">
+            <tr>
+                <th>Friend Name: </th>
+                <td>@friend.Name</td>
+            </tr>
+            <tr>
+                <th>Friend Mail: </th>
+                <td>@friend.Email</td>
+            </tr>
+              </table>
+         
+              <div class="button-conteiner"> 
+                <a class="general-button" id="delete-button" asp-controller="Friendship" asp-action="DeleteFriend" asp-route-friendshipId="@friend.FriendshipId" >Remove</a>
+              </div>
+
+              </div>
+           
+
 
 
     }
 
-</table>
 }
 </div>
    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), Bootstrap4PagedListRenderOptions.OnlyShowFivePagesAtATime)

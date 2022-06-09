@@ -2,74 +2,80 @@
 @using X.PagedList
 @using X.PagedList.Mvc.Bootstrap4.Core
 @using X.PagedList.Mvc.Core
-@model IPagedList<Accessor>
+@model IEnumerable<Accessor>
 
 
 @{
     ViewData["Title"] = "Manage File";
-   // List<Friend> friendss = (List<Friend>) ViewData["friends"];
-    PagedList<Friend> friends = (PagedList<Friend>) ViewData["friends"];
+    List<Friend> friends = (List<Friend>) ViewData["friends"];
+   // PagedList<Friend> friends = (PagedList<Friend>) ViewData["friends"];
     int fileId = ViewBag.fileId;
     ShareWith sharewith = new ShareWith();
     sharewith.DocumentId = fileId;
 }
 
+<p>Manage</p>
+   <div class="general-container">
 @if ( @Model.Count() > 0 )
 {
-    <table>
-        <tr>
-            <th>Access ID</th>
-
-            <th>Accessor Name</th>
-            <th>Permission Date</th>
-            <th>Given Time</th>
-            <th> </th>
-        </tr>
 
         @foreach (Accessor access in @Model)
         {
-            <tr>
-            <th> @access.AccessId</th>
-            <th> @access.AccessorName</th>
-            <th> @access.GivenTime</th>
-            <th> <a asp-controller="DocumentAccess" asp-action="EndSharing" asp-route-accessId=@access.AccessId>End Sharing</a></th>
-            </tr>
+            <div class="my-file-container">
+                  <table class ="vertical-table">
+                     <tr>
+                         <th>Accessor Name: </th>
+                         <td>@access.AccessorName</td>
+                     </tr>
+                     <tr>
+                         <th>Permition Date: </th>
+                         <td>@access.GivenTime</td>
+                    </tr>
+                </table>
+
+                 <div class="button-conteiner"> 
+                  <a class="general-button" id="end-sharing-button" asp-Controller="DocumentAccess" asp-action="EndSharing" asp-route-accessId="@access.AccessId">End Sharing</a>
+              </div>
+            </div>
         }
 
-    </table>
 }else{  
     <p> No one Can Access </p>
 }
+        </div>
 
-<br />
-<br />
 
 <h3>Friends</h3>
-
+<div class="general-container">
 @if ( @friends.Count() > 0 )
 {
-
-    <table>
-        <tr>
-            <th>Friend Name</th>
-            <th>Friend Email</th>
-            <th>ID</th>
-            
-            <th> </th>
-        </tr>
-
         @foreach (Friend friend in friends)
         {
-         <tr>
-            <th> @friend.Name</th>
-            <th> @friend.Email</th>
-            <th> <a asp-controller="DocumentAccess" asp-action="share" asp-route-fileId=@fileId asp-route-friendshipId=@friend.FriendshipId>share</a> </th>
+            <div class="my-file-container">
+         <table class ="vertical-table">
+            <tr>
+                <th>Friend Name: </th>
+                <td>@friend.Name</td>
+            </tr>
+            <tr>
+                <th>Friend Mail: </th>
+                <td>@friend.Email</td>
+            </tr>
+              </table>
+         
+              <div class="button-conteiner"> 
+                  <a class="general-button" id="share-button" asp-Controller="DocumentAccess" asp-action="Share" asp-route-fileId="@fileId" asp-route-friendshipId="@friend.FriendshipId">Share</a>
+              </div>
 
-         </tr>
+
+            </div>
+      
         }
-
-    </table>
+       
+   
        
     }else{
     <p> No one Can Access </p>
 }
+
+</div>

@@ -29,7 +29,7 @@ namespace File_Sharing.Controllers
 
 
         [HttpGet]
-        public IActionResult Index(int fileId, int page = 1, int test = 1)
+        public IActionResult Index(int fileId)
         {
             int userId = GetAuthenticatedUserId();
             List<DocumentAccess> accesses = _db.GetAccessorsList(userId, fileId); 
@@ -56,15 +56,13 @@ namespace File_Sharing.Controllers
                 friends.Add(new Friend(){
                     FriendshipId = friend.Id,
                     Name = _db.GetUserNameById(friendId),
-                    Email = "Email"
+                    Email = _db.GetUserEmailWithId(friendId), 
                 });
 
             }
             ViewBag.fileId = fileId;
-            PagedList<Friend> fr = (PagedList<Friend>)friends.ToPagedList(test,1);
-            ViewData["friends"] = fr;
-            PagedList<Accessor> pagedList = (PagedList<Accessor>)accessors.ToPagedList(page, 10);
-            return View(pagedList);
+            ViewData["friends"] = friends;
+            return View(accessors);
         }
 
         [HttpGet]

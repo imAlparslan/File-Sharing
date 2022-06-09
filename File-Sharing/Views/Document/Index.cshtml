@@ -6,21 +6,24 @@
 
 @{
     ViewData["Title"] = "My Files";
+    
 }
-
 
 <h1>My Files</h1>
 
 @if(@Model.Count() > 0)
 {
+
     @foreach (MyFile myFile in @Model)
     {
+      
+       
+       <div class="my-file-container">
 
-    <div class="my-file-container">
         <table class ="vertical-table">
             <tr>
                 <th>File Name: </th>
-                <td>@myFile.FileName</td>
+                <td title="@myFile.FileName">@myFile.FileName</td>
             </tr>
             <tr>
                 <th>File Size: </th>
@@ -31,11 +34,10 @@
                 <td>@myFile.UploadDate</td>
             </tr>
         </table>
-
         <div class="button-conteiner">
         <a class="general-button" id ="manage-button"  asp-controller="DocumentAccess" asp-action="Index" asp-route-fileId=@myFile.DocumentId>Manage</a>
-        <a class="general-button" id ="manage-button"  asp-controller="Document" asp-action="Download" asp-route-documentId=@myFile.DocumentId>Download</a>
-        <a class="general-button" id ="manage-button"  asp-controller="Document" asp-action="Delete" asp-route-fileId=@myFile.DocumentId>Delete</a>
+        <a class="general-button" id ="download-button"  asp-controller="Document" asp-action="Download" asp-route-documentId=@myFile.DocumentId>Download</a>
+        <a class="general-button" id ="delete-button"  asp-controller="Document" asp-action="Delete" asp-route-fileId=@myFile.DocumentId>Delete</a>
 
     
     </div>

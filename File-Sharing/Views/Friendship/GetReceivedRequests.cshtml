@@ -18,27 +18,32 @@
 {
     
 
-<table>
-    <tr>
-        <th> Name </th>
-        <th> Email </th>
-        <th> </th>
-    </tr>
     @foreach (Request request in Model)
     {
-    <tr> 
-        <td>@request.SenderName </td>  
-        <td>@request.SenderEmail</td>
-        <td> <a asp-controller="Friendship" asp-action="AcceptRequest" asp-route-FriendshipId="@request.FriendshipId" >Approve</a> 
-             <td> <a asp-controller="Friendship" asp-action="RejectRequest" asp-route-FriendshipId="@request.FriendshipId" >Reject</a>
-        </td>
-    </tr>
+
+        <div class="my-file-container">    
+         <table class ="vertical-table">
+            <tr>
+                <th>Sender Name: </th>
+                <td>@request.SenderName</td>
+            </tr>
+            <tr>
+                <th>Sender Mail: </th>
+                <td>@request.SenderEmail</td>
+            </tr>
+              </table>
+         
+              <div class="button-conteiner"> 
+                <a class="general-button" id="manage-button" asp-controller="Friendship" asp-action="AcceptRequest" asp-route-FriendshipId="@request.FriendshipId" >Accept</a>
+                <a class="general-button" id="delete-button" asp-controller="Friendship" asp-action="RejectRequest" asp-route-friendshipId="@request.FriendshipId" >Reject</a>
+              </div>
+
+              </div>
     
 
 
     }
 
-</table>
 
 }   
 

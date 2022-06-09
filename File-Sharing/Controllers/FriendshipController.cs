@@ -49,7 +49,7 @@ namespace File_Sharing.Controllers
                     FriendshipId = friend.Id
                 });
             }
-            PagedList<Friend> pagedList = (PagedList<Friend>)friends.ToPagedList();
+            PagedList<Friend> pagedList = (PagedList<Friend>)friends.ToPagedList(page, 4);
 
             return View(pagedList);
         }

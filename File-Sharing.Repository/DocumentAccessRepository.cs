@@ -93,5 +93,11 @@ namespace File_Sharing.Repository
         {
             return _db.DocumentAccesses.Where(x => x.AccessorId == userId).ToList();
         }
+
+        public string GetUserEmailWithId(int id)
+        {
+            return _db.Users.FirstOrDefault(x => x.Id == id).Email;
+           
+        }
     }
 }

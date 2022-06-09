@@ -1,5 +1,6 @@
 using File_Sharing.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -35,7 +36,10 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection"), b => b.MigrationsAssembly("File-Sharing"));
 });
 
-
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 1073741824;
+});
 
 var app = builder.Build();
 

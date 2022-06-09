@@ -22,10 +22,11 @@ body {
 }
 
 .side-bar {
-
-    width: 180px;
+    background-color: black;
+    width: 20%;
+    min-width: 10%;
+    max-width: 30%;
     float: left;
-    position: absolute;
 }
 
 .side-bar-button{
@@ -37,33 +38,51 @@ body {
 }
 
 .side-bar-content {
-    background: red;
-    color: #fff;
+    color: black;
     height: 500px;
-    width: 630px;
-    border-radius: 4px;
+    max-width: 630px;
     margin: 20px;
     margin-left: 25%;
-    border: 1px solid #777;
 
 }
 
-.my-file-container{
-
-    box-sizing:content-box;
-    height: 120px;
-    width: 700px;
-    border: 2px solid black;
-    margin-left: auto;
-    margin-right: auto;
+.general-container {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    min-width: 300px;
+    max-height:500px;
+    overflow:auto scroll;
+    border: none;
     margin-bottom: 20px;
-    padding:10px;
+    padding: 10px;
 }
 
-  #inbox{
-      height:160px;
-  }
 
+.my-file-container {
+    box-sizing: border-box;
+    display: inline-block;
+    width:100%;
+    min-width: 300px;
+    border: 2px solid black;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+
+
+
+td {
+    max-width:300px;
+    -webkit-line-clamp:1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+th{
+    float:left;
+}
 .button-conteiner {
     float: right;
     width: fit-content;
@@ -76,25 +95,54 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
+    color:white;
     background-color: rgb(203, 190, 190,0.5);
     box-sizing: content-box;
     padding-block: 5px;
     padding-inline: 35px;
 }
+
+.general-button:hover {
+    color: lightgray;
+}
 #download-button {
-    color:white;
     background-color:cornflowerblue;
 }
+
 #manage-button {
-    display:block;
-    margin-bottom:8px;
+    display: block;
+    margin-bottom: 8px;
+    background-color: rgb(7, 171, 113, 0.8)
     
 }
-#download-button:hover{
-    color:lightgray;
+#delete-button {
+    display: block;
+    margin-top: 8px;
+    background-color: red;
 }
-.vertical-table{
-    float:left;
+
+#share-button {
+    display: block;
+    margin-top: 8px;
+    background-color: rgb(19, 79, 236)
+}
+    #share-button:hover {
+        background-color: rgb(19, 79, 236,0.7);
+        color:white;
+    }
+#end-sharing-button {
+    display: block;
+    margin-top: 8px;
+    background-color: red;
+}
+    #end-sharing-button:hover {
+        background-color: rgb(218, 18, 18);
+        color: white;
+    }
+
+
+.vertical-table {
+    float: left;
 }
 
 .vertical-table{

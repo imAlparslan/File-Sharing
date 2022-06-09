@@ -5,12 +5,14 @@
 }
 .render-body-container{
     background-color:rgb(14, 107, 193, 0.2);
+    width:100%;
+    min-width:600px;
 }
 
 .navbar {
     width: auto;
+    min-width: 700px;
     height: 5em;
-
 }
 
 
