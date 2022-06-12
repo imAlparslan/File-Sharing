@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Send Friendship Request";
+    string msg = ViewBag.msg;
 }
 
 <h1>Send Friendship Request</h1>
@@ -10,7 +11,9 @@
 
 <div class="side-bar-content">
 
-
+@if(msg != null){
+    <p>@msg</p>
+}
 
 <form asp-controller="Friendship" asp-action="SendRequest" method="post">
 

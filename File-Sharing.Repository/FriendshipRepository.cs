@@ -84,5 +84,10 @@ namespace File_Sharing.Repository
             _db.Friendships.Remove(friendship);
             _db.SaveChanges();
         }
+
+        public User GetUserByEmail(string email)
+        {
+            return _db.Users.FirstOrDefault(x => x.Email.Equals(email));
+        }
     }
 }
