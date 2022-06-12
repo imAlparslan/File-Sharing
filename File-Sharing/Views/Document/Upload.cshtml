@@ -3,14 +3,17 @@
 @{
             ViewData["Title"] = "Upload File";
             double Quota = (double)System.Math.Round(ViewBag.UserQuota,2);
-          
+            string msg = (string)ViewBag.msg;
 }
 
 <div>
     <p>Your Remaining Upload Capacity is <span style="font-weight:bold">@Quota Mb</span>.</p>
 </div>
 
-
+@if(msg != null)
+{
+    <p>@msg</p>
+}
 <form asp-controller="Document" asp-action="Upload" enctype="multipart/form-data" class="form">
     <div class="form-row">
             <label asp-for="File">File Upload</label>

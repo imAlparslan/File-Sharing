@@ -26,8 +26,23 @@ namespace File_Sharing.Controllers
         [Route("sendrequest")]
         public IActionResult SendRequest(FriendshipRequest request)
         {
+            
+
             //check request valid
             int senderId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("ID")).Value);
+            string senderMail = _db.GetUserMailById(senderId);
+            User r = _db.GetUserByEmail(request.ReciverEmail);
+            
+            if (senderMail.Equals(request.ReciverEmail))
+            {
+                ViewBag.msg = "You cannot sent request";
+                return View("SendRequest");
+            }else if (r == null)
+            {
+                ViewBag.msg = "User found!";
+                return View("SendRequest");
+            }
+
             _db.CreateRequest(senderId, request.ReciverEmail);
             return RedirectToAction("Index","Home");
         }

@@ -17,7 +17,8 @@ namespace File_Sharing.Services
         public string GetUserMailById(int userId);
         public void Delete(int friendshipId);
         public List<Friendship> GetReceivedRequests(int userId);
-        
+        public User GetUserByEmail(string email);
+
 
     }
 }

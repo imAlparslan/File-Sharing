@@ -79,6 +79,14 @@ namespace File_Sharing.Controllers
             {
             
             User fileOwner = _db.GetUserById(Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("ID")).Value));
+
+            if(fileOwner.RemainingQuota < doc.File.Length / 1024.00 / 1024.00)
+             {
+
+             ViewBag.msg = "You not have enough quota";
+             ViewBag.UserQuota = fileOwner.RemainingQuota;
+                        return View("Upload");
+             }
             var location = Path.Combine(Directory.GetCurrentDirectory(), fileOwner.FolderPath + doc.File.FileName);
             var stream = new FileStream(location, FileMode.Create);
             doc.File.CopyTo(stream);
