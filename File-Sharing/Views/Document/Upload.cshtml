@@ -2,20 +2,24 @@
 
 @{
             ViewData["Title"] = "Upload File";
-
+            double Quota = (double)System.Math.Round(ViewBag.UserQuota,2);
+          
 }
+
+<div>
+    <p>Your Remaining Upload Capacity is <span style="font-weight:bold">@Quota Mb</span>.</p>
+</div>
+
 
 <form asp-controller="Document" asp-action="Upload" enctype="multipart/form-data" class="form">
     <div class="form-row">
-    <h4>Your Upload Quota is: </h4>
-    </div>
-    <div class="form-row">
-    <label asp-for="File">File Upload</label>
-    <br />
+            <label asp-for="File">File Upload</label>
+      </div>
+     
     <input asp-for="File" id="File" type="file"/>
-    </div>
+ 
     <div>
-             <p id="GFG_DOWN" style=
+        <p id="GFG_DOWN" style=
         "color:green; font-size: 1em; font-weight: bold;">
     </p>
     </div>

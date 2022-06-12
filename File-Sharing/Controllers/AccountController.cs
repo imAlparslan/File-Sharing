@@ -62,7 +62,7 @@ namespace File_Sharing.Controllers
 
             await HttpContext.SignInAsync(principal);
 
-            return RedirectToAction("index","Home");
+            return RedirectToAction("SharingWithMe", "DocumentAccess");
         }
 
 
