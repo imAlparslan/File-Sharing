@@ -20,6 +20,8 @@ namespace File_Sharing.Repository
         {
             
             Document document = _db.Documents.FirstOrDefault( x => x.Id == DocumentId);
+            User user = _db.Users.FirstOrDefault( x => x.Id == document.OwnerId);
+            user.RemainingQuota += document.FileSize;
             _db.Documents.Remove(document);
             _db.SaveChanges();
         }

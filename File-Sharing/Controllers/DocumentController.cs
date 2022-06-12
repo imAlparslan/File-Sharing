@@ -46,6 +46,8 @@ namespace File_Sharing.Controllers
         public IActionResult Delete(int fileId)
         {
             //delete from folder.
+
+            User user = _db.GetUserById(GetAuthenticatedUserId());
             _db.Delete(fileId);
             return RedirectToAction("Index", "Document");
         }
@@ -55,6 +57,8 @@ namespace File_Sharing.Controllers
         {
             if (User != null && User.Identity.IsAuthenticated)
             { 
+                User user = _db.GetUserById(GetAuthenticatedUserId());
+                ViewBag.UserQuota = user.RemainingQuota;
                 return View();
             }
             else
@@ -85,12 +89,12 @@ namespace File_Sharing.Controllers
             document.FileSize = Math.Round(stream.Length/1024.00/1024.00,2);
             
 
-             
+             stream.Close();
             _db.Upload(document);
             
             }
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Document");
 
             }
             return RedirectToAction("login","Account");
