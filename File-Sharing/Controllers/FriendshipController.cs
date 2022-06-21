@@ -35,11 +35,11 @@ namespace File_Sharing.Controllers
             
             if (senderMail.Equals(request.ReciverEmail))
             {
-                ViewBag.msg = "You cannot sent request";
+                ViewBag.msg = "You cannot sent request by yourself";
                 return View("SendRequest");
             }else if (r == null)
             {
-                ViewBag.msg = "User found!";
+                ViewBag.msg = "User not found!";
                 return View("SendRequest");
             }
 
