@@ -43,6 +43,9 @@
 
     }
 
+}else{
+    <p>You don't have any friend.</p>
 }
+
 </div>
    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), Bootstrap4PagedListRenderOptions.OnlyShowFivePagesAtATime)
